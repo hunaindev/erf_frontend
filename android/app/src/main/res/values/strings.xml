@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Erfluencer</string>
+    <string name="title_activity_main">Erfluencer</string>
+    <string name="package_name">com.erfluencer.app</string>
+    <string name="custom_url_scheme">com.erfluencer.app</string>
+</resources>

@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.erfluencer.app",
+      "sha256_cert_fingerprints": [
+        "59:54:5C:26:80:32:8D:D0:D4:4C:71:A8:D7:7F:18:D6:CA:EE:6A:D1:BB:4E:9A:A5:CF:09:EE:20:E5:0D:33:68"
+      ]
+    }
+  }
+]

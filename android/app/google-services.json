@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "326744368875",
+    "project_id": "erfluencer-app",
+    "storage_bucket": "erfluencer-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326744368875:android:3d4a0584a60f122b3e80ae",
+        "android_client_info": {
+          "package_name": "com.erfluencer.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8lqk9Po_dGzayh4G-hUupmXIPeLHMKFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326744368875:android:ea6ad2b90d6841173e80ae",
+        "android_client_info": {
+          "package_name": "com.erfluencer.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8lqk9Po_dGzayh4G-hUupmXIPeLHMKFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
