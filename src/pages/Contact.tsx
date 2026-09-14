@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Mail, MessageSquare, Send, Sparkles } from "lucide-react";
+import { LocateIcon, Mail, MessageSquare, Phone, Send, Sparkles } from "lucide-react";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -135,6 +135,26 @@ const Contact: React.FC = () => {
                     <div>
                       <p className="text-sm font-semibold text-foreground">Geri Dönüş</p>
                       <p className="text-sm text-muted-foreground">Çoğu mesaja 24 saat içinde dönüş yapıyoruz.</p>
+                    </div>
+                  </div>
+
+                   <div className="flex items-start gap-3 rounded-2xl border border-primary/20 bg-background/70 p-4">
+                    <span className="mt-0.5 rounded-full bg-primary/10 p-2 text-primary">
+                      <Phone size={18} />
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">Telefon numarası</p>
+                      <p className="text-sm text-muted-foreground">+90 530 741 59 56</p>
+                    </div>
+                  </div>
+
+                   <div className="flex items-start gap-3 rounded-2xl border border-primary/20 bg-background/70 p-4">
+                    <span className="mt-0.5 rounded-full bg-primary/10 p-2 text-primary">
+                      <LocateIcon size={18} />
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">Adres</p>
+                      <p className="text-sm text-muted-foreground"> Aşağı Öveçler Mh. Kabil Cd. 1321. Sk. 2/9, 06460 Çankaya/Ankara, Türkiye</p>
                     </div>
                   </div>
                 </div>

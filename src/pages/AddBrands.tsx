@@ -326,7 +326,7 @@ const BrandsPage = () => {
                 <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
                         <h1 style={{ fontSize: '24px', fontWeight: 'bold' }}>Marka Ortaklari</h1>
-                        {(subscriptionDetails?.plan_id === plans.agencyMonthly || subscriptionDetails?.plan_id === plans.agencyYearly) && (
+                        {subscriptionDetails?.status === 'active' && (subscriptionDetails?.plan_id === plans.agencyMonthly || subscriptionDetails?.plan_id === plans.agencyYearly) && (
                             <Button
                                 onClick={() => setIsAddBrandOpen(true)}
                                 style={{

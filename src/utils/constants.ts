@@ -1,4 +1,4 @@
-// const defaultDevelopmentBaseUrl = "http://192.168.1.182:8000";
+// const defaultDevelopmentBaseUrl = "http://localhost:8000";
 const defaultDevelopmentBaseUrl = "https://erfluencer.com/Eros/public/";
 
 // For local device testing, keep the LAN URL hardcoded here.

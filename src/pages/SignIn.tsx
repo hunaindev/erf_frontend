@@ -89,13 +89,15 @@ const SignIn: React.FC = () => {
           localStorage.setItem("instagram", response.data?.instagramState);
           setIsInfluencer(true);
           setIsLoading(false);
-          navigate("/influencer/dashboard", { replace: true });
+          window.location.href = "/influencer/dashboard";
+          // navigate("/influencer/dashboard", { replace: true });
           return;
         }
 
         if (response.data.role === "brand") {
           setIsLoading(false);
-          navigate("/dashboard", { replace: true });
+          // navigate("/dashboard", { replace: true });
+          window.location.href = "/dashboard";
           return;
         }
 

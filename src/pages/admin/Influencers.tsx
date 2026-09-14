@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Search, Filter, Users, TrendingUp, Star, Award, Eye, FileDown, Download, ChevronUp, ChevronDown } from 'lucide-react';
+import { Search, Filter, Users, TrendingUp, Star, Award, Eye, FileDown, Download, ChevronUp, ChevronDown, Trash, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { exportToCSV, exportToPDF } from '../../utils/tableExport';
 import axios from 'axios';
@@ -88,6 +88,7 @@ const AdminInfluencers = () => {
   const [debouncedTerm, setDebouncedTerm] = useState('');
   const [loadingId, setLoadingId] = useState(null);
   const [approvedLoadingId, setOnaylandıLoadingId] = useState(null);
+  const [deleteInfluencerId, setDeleteInfluencerId] = useState<number | null>(null);
 
 
   const getLevelBadge = (level: string) => {
@@ -308,6 +309,52 @@ const AdminInfluencers = () => {
     updateOnaylandı(id, {
       onSettled: () => {
         setOnaylandıLoadingId(null);
+      },
+    });
+  };
+
+  const useDeleteInfluencer = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+      mutationFn: (id: number) =>
+        axios.delete(`${baseUrl}/api/delete-influencer/${id}`, {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem("token") || '""'
+            )}`,
+            "Content-Type": "application/json",
+          },
+        }),
+
+      onSuccess: () => {
+        toast.success("Influencer başarıyla silindi");
+        queryClient.invalidateQueries({
+          queryKey: ["all-influencer"],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["search-influencer"],
+        });
+      },
+      onError: (err: any) => {
+        toast.error(err?.response?.data?.message || "Influencer silinirken bir hata oluştu");
+      }
+    });
+  };
+
+  const { mutate: deleteInfluencerMutate } = useDeleteInfluencer();
+
+  const handleDeleteInfluencer = () => {
+    if (!deleteInfluencerId) return;
+
+    setLoadingId(deleteInfluencerId);
+
+    deleteInfluencerMutate(deleteInfluencerId, {
+      onSuccess: () => {
+        setDeleteInfluencerId(null);
+      },
+      onSettled: () => {
+        setLoadingId(null);
       },
     });
   };
@@ -557,6 +604,21 @@ const AdminInfluencers = () => {
                             Görüntüle
                           </Button>
 
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setDeleteInfluencerId(influencer.id)}
+                            disabled={loadingId === influencer.id}
+                            className="view-button ml-2 text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
+                          >
+                            {loadingId === influencer.id ? (
+                              <Loader2 className="mr-1 h-4 w-4 animate-spin" />
+                            ) : (
+                              <Trash className="mr-1 h-4 w-4" />
+                            )}
+                            Sil
+                          </Button>
+
 
                         </TableCell>
                       </TableRow>
@@ -697,6 +759,51 @@ const AdminInfluencers = () => {
               </div>
 
             )}
+          </DialogContent>
+        </Dialog>
+
+        {/* Delete Influencer Dialog */}
+        <Dialog
+          open={deleteInfluencerId !== null}
+          onOpenChange={(open) => {
+            if (!open && loadingId === null) {
+              setDeleteInfluencerId(null);
+            }
+          }}
+        >
+          <DialogContent className="dialog-content">
+            <DialogHeader className="dialog-header">
+              <DialogTitle className="dialog-title">
+                Influencer'ı Sil
+              </DialogTitle>
+            </DialogHeader>
+
+            <div className="space-y-5">
+              <p className="text-sm text-gray-600">
+                Bu influencer'ı ve ilgili tüm verilerini silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.
+              </p>
+
+              <div className="flex justify-end gap-3">
+                <Button
+                  variant="outline"
+                  onClick={() => setDeleteInfluencerId(null)}
+                  disabled={loadingId !== null}
+                >
+                  İptal
+                </Button>
+
+                <Button
+                  onClick={handleDeleteInfluencer}
+                  disabled={loadingId !== null}
+                  className="bg-red-600 text-white hover:bg-red-700"
+                >
+                  {loadingId !== null && (
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  )}
+                  Sil
+                </Button>
+              </div>
+            </div>
           </DialogContent>
         </Dialog>
       </div>

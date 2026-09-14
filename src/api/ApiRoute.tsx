@@ -178,6 +178,11 @@ export const getLandingSlides = async (id) => {
 
 
 
+export const deleteInfluencer = async (id: number | string) => {
+    const response = await api.delete(`/delete-influencer/${id}`);
+    return response.data;
+};
+
 /* end admin Api */
 
 
